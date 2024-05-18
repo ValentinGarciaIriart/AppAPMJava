@@ -1,7 +1,10 @@
 #!/bin/sh
-if [ -z "$DOCKER_ACCOUNT" ]; then
-    DOCKER_ACCOUNT=ewolff
-fi;
+DOCKER_ACCOUNT=valentingarciairiart
+DOCKER_USERNAME=valentingarciairiart
+DOCKER_PASSWORD=Vale0811!
+
+echo $DOCKER_PASSWORD | docker login --username $DOCKER_USERNAME --password-stdin
+
 docker build --tag=microservice-kubernetes-demo-apache apache
 docker tag microservice-kubernetes-demo-apache $DOCKER_ACCOUNT/microservice-kubernetes-demo-apache:latest
 docker push $DOCKER_ACCOUNT/microservice-kubernetes-demo-apache
