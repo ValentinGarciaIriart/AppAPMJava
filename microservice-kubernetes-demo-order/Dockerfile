@@ -5,22 +5,17 @@ WORKDIR /app
 
 # Copy the application JAR
 COPY target/microservice-kubernetes-demo-order-0.0.1-SNAPSHOT.jar /app/
-COPY opentelemetry-javaagent.jar /app/opentelemetry-javaagent.jar
 COPY elastic-apm-agent-1.49.0.jar /app/elastic-apm-agent.jar
 
 # Configuration and start command including the APM agent
 CMD ["/usr/bin/java", "-Xmx400m", "-Xms400m", \
   "-javaagent:/app/elastic-apm-agent.jar", \
   "-Delastic.apm.service_name=Order", \
-  "-Delastic.apm.secret_token=b3hCoIk2pNQPDeVOaG", \
-  "-Delastic.apm.server_url=https://ae27d0448acf4a66b82af11e5ae6d215.apm.eastus2.azure.elastic-cloud.com:443", \
-  "-Delastic.apm.environment=my-environment", \
+  "-Delastic.apm.secret_token=uYOVqj6gdRfYmuvvt1", \
+  "-Delastic.apm.server_url=https://c3b8fc46b53644bd9a34a844b2473cf1.apm.eastus2.azure.elastic-cloud.com:443", \
+  "-Delastic.apm.environment=APM", \
   "-Delastic.apm.application_packages=org.example", \
-  "-javaagent:/app/opentelemetry-javaagent.jar", \
-  "-Dotel.service.name=Order", \
-  "-Dotel.traces.exporter=zipkin", \
   "-jar", "/app/microservice-kubernetes-demo-order-0.0.1-SNAPSHOT.jar"]
 
 # Expose the port the application runs on
 EXPOSE 8080
-
